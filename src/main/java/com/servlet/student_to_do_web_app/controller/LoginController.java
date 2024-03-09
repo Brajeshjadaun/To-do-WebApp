@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet {
 		if (student != null) {
 			httpSession.setAttribute("userSession", student);
 			httpSession.setAttribute("stId", student.getStId());//Set the stId in the session
-			httpSession.setMaxInactiveInterval(40);
+			httpSession.setMaxInactiveInterval(50);
 			req.setAttribute("message1", "Login-Successfull");
 			req.setAttribute("message2", student);
 			RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");

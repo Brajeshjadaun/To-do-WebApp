@@ -13,6 +13,10 @@ public class TaskService {
 	public Task saveTaskService(Task task, int stId) {
 		return taskDao.saveTaskDao(task, stId);
 	}
+	
+	public Task getTaskByIdService(int taskId) {
+		return taskDao.getTaskByIdDao(taskId);
+	}
 
 	public List<Task> getAllTaskService(int stId){
 		return taskDao.getAllTaskDao(stId);	
@@ -25,4 +29,9 @@ public class TaskService {
 	public int deleteTaskService(int taskId) {
 		return taskDao.deleteTaskDao(taskId);
 	}
+	
+	public int updateTaskService(Task task) {
+		return taskDao.updateTaskDao(task);
+	}
+	
 }

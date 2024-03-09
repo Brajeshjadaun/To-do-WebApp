@@ -126,6 +126,25 @@ body {
 .container2 .btn2:hover {
 	background-color: blue;
 }
+
+.container2 .btnlogout {
+	position: relative;
+	left: 800px;
+	top: 15px;
+	background-color: #0171d3;
+	color: #ffffff;
+	border: 1px solid #0171d3;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 40px;
+}
+
+.container2 .btnlogout:hover {
+	background-color: blue;
+}
+
 </style>
 
 </head>
@@ -165,6 +184,7 @@ body {
 			Student authenticatedUser = (Student) session.getAttribute("userSession");
 			if (authenticatedUser != null) {
 			%>
+			<a href="logout"><button class="btnlogout" type="submit">LogOut</button></a>
 			<h3 class="msgDisplay">
 				Id:
 				<%=authenticatedUser.getStId()%><br> Name:
@@ -176,8 +196,6 @@ body {
 			<%
 			}
 			%>
-
-
 
 			<a href="homeAddSession"><button class="btn1" type="submit">Add
 					Your Task</button></a><br> <a href="homeDisplayAllSession"><button

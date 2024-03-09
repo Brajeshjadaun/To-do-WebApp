@@ -85,6 +85,24 @@
 		background-color: blue;
 	}
 	
+		.container2 .btnlogout {
+	position: relative;
+	left: 800px;
+	top: 15px;
+	background-color: #0171d3;
+	color: #ffffff;
+	border: 1px solid #0171d3;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 40px;
+}
+
+.container2 .btnlogout:hover {
+	background-color: blue;
+}
+	
 </style>
 </head>
 <body>
@@ -115,6 +133,7 @@
 		<div class="container2">
 			
 			
+			<a href="logout"><button class="btnlogout" type="submit">LogOut</button></a><br>
 			<table class="table" border="2px">
 			<%
 			if (str1 != null) {

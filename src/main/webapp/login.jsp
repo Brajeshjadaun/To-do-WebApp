@@ -36,7 +36,7 @@ body {
 .container2 .msgHeading{
 		color: red;
 		position: relative;
-		left: 100px;
+		left: 80px;
 		font-size: 25px;
 		margin: 0;
 		padding: 0;

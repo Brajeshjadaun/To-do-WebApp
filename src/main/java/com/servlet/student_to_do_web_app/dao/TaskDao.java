@@ -36,6 +36,29 @@ public class TaskDao {
 		}return null;
 	}
 	
+	public Task getTaskByIdDao(int taskId) {
+		String displayTaskByIdQuery = "select * from task where taskId=?";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(displayTaskByIdQuery);
+			preparedStatement.setInt(1, taskId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				int taskId2 = resultSet.getInt("taskId");
+				String taskName2 = resultSet.getString("taskName");
+				LocalDate taskDate2 = resultSet.getDate("taskDate").toLocalDate();
+				String taskInfo2 = resultSet.getString("taskInfo");
+				
+				Task task = new Task(taskId2, taskName2, taskDate2, taskInfo2);
+				return task;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}return null;
+		
+	}
+	
 	public List<Task> getAllTaskDao(int stId){
 		String displayAllTaskQuery = "select * from task where stId=?";
 		Task task = null;
@@ -96,6 +119,23 @@ public class TaskDao {
 			PreparedStatement preparedStatement = connection.prepareStatement(deleteTaskQuery);
 			preparedStatement.setInt(1, taskId);
 			return preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}return 0;
+	}
+	
+	public int updateTaskDao(Task task) {
+		String updateTaskQuery = "update task set taskName=?, taskDate=?, taskInfo=? where taskId=?";
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(updateTaskQuery);
+			preparedStatement.setString(1, task.getTaskName());
+			preparedStatement.setObject(2, task.getTaskDate());
+			preparedStatement.setString(3, task.getTaskInfo());
+			preparedStatement.setInt(4, task.getTaskId());
+			
+			return preparedStatement.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}return 0;
