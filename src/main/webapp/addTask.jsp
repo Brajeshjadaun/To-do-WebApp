@@ -41,6 +41,24 @@
 		padding-bottom: 20px;
 	}
 	
+	.container2 .msgHeading{
+		color: green;
+		position: relative;
+		left: 380px;
+		font-size: 25px;
+		margin: 0;
+		padding: 0;
+	}
+	
+	.container2 .msgDisplay{
+		color: orange;
+		position: relative;
+		left: 100px;
+		font-size: 25px;
+		margin: 0;
+		padding: 0;
+	}
+	
 	.container2 .inputs {
 	border: 2px solid #e4e4e4;
 	border-radius: 5px;
@@ -53,7 +71,7 @@
 	
 	.container2 .btn2{
 		position: relative;
-		left: 380px;
+		left: 350px;
 		background-color: #0171d3;
 		color: #ffffff;
 		border: 1px solid #0171d3;
@@ -71,17 +89,30 @@
 </style>
 </head>
 <body>
+
+	<%
+	String str = (String)request.getAttribute("message");
+	%>
+
 	<div class="container1">
 		<div class="container2">
-			<form action="taskInformation" method="post">
+			<form action="addTask" method="post">
+			
+			<%
+			if(str != null){%>
+			<h3 class="msgHeading"><%= str%></h3><br>
+			<%}%>
+			
 		
 			<h1 class="heading">Add-Task</h1>
 			
-			<input class="inputs" type="text" name="taskName" placeholder="Task Name" autofocus="autofocus"><br><br>
-			<input class="inputs" type="date" name="taskDate" placeholder="Task Date"><br><br>
+			<input class="inputs" type="text" name="taskName" placeholder="Task Name" autofocus="autofocus" required="required"><br><br>
+			<input class="inputs" type="date" name="taskDate" placeholder="Task Date" required="required"><br><br>
 			<textarea class="inputs" name="taskInfo" placeholder="Task Information"></textarea><br><br>
 			
-			<a href="taskInformation"><button class="btn2" type="submit">Add</button></a><button class="btn2" type="reset">Reset</button>
+			<a href="addTask"><button class="btn2" type="submit">Add</button></a>
+			<button class="btn2" type="reset">Reset</button>
+			<a href="home"><button class="btn2" type="button">Home</button></a>
 
 			</form>
 		</div>

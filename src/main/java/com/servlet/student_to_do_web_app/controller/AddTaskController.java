@@ -12,36 +12,50 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.servlet.student_to_do_web_app.dto.Student;
 import com.servlet.student_to_do_web_app.dto.Task;
 import com.servlet.student_to_do_web_app.service.TaskService;
 
-@WebServlet(value = "/taskInformation")
+@WebServlet(value = "/addTask")
 public class AddTaskController extends HttpServlet {
 	
 	TaskService taskService = new TaskService();
 	
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-//		int taskId = Integer.parseInt(req.getParameter("taskId"));
+		// Retrieve stId from session
+	    Integer stId = (Integer) req.getSession().getAttribute("stId");
+		
+		HttpSession session = req.getSession();
+        Student authenticatedUser = (Student) session.getAttribute("userSession");
+        
+        if (authenticatedUser == null) {
+        	req.setAttribute("message3", "Please login again your session is out");
+        	RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
+			dispatcher.forward(req, resp);
+        }
+		
+        
 		String taskName = req.getParameter("taskName");
 		LocalDate taskDate = LocalDate.parse(req.getParameter("taskDate"));
 		String taskInfo = req.getParameter("taskInfo");
 		
-		Task task = new Task(taskName, taskDate, taskInfo);
-		Task task2 = taskService.saveTaskService(task);
 		
-		PrintWriter printWriter = resp.getWriter();
+		Task task = new Task(taskName, taskDate, taskInfo);
+		task.setstId(authenticatedUser.getStId());
+		Task task2 = taskService.saveTaskService(task, stId);
 		
 		if(task2 != null) {
-			printWriter.write("<html><body><h1 style='color:green; background-color:white;display:flex; align-items:center;justify-content:center;'>Task added successfully</h1></body></html>");
+			req.setAttribute("message", "Task added successfully");
 			RequestDispatcher dispatcher = req.getRequestDispatcher("addTask.jsp");
-			dispatcher.include(req, resp);
+			dispatcher.forward(req, resp);
 		}else {
-			printWriter.write("<html><body><h1 style='color:red;background-color:white;display:flex; align-items:center;justify-content:center;'>Can't add Task</h1></body></html>");
-			RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
-			dispatcher.include(req, resp);
+			req.setAttribute("message", "Can't add Task");
+			RequestDispatcher dispatcher = req.getRequestDispatcher("home");
+			dispatcher.forward(req, resp);
 		}
 		
 		

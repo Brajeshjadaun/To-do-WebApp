@@ -35,6 +35,10 @@ public class StudentDao {
 	
 	public Student getStudentDao(String userName, String password) {
 		
+		final String userEmail = userName;
+		final String userPass = password;
+		
+		
 		String displayStudentQuery = "select * from student where stEmail=? and password=?";
 		Student student = null;
 		

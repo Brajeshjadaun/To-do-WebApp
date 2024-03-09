@@ -8,12 +8,14 @@ public class Task {
 	private String taskName;
 	private LocalDate taskDate;
 	private String taskInfo;
-	public Task(int taskId, String taskName, LocalDate taskDate, String taskInfo) {
+	private int stId;
+	public Task(int taskId, String taskName, LocalDate taskDate, String taskInfo, int stId) {
 		super();
 		this.taskId = taskId;
 		this.taskName = taskName;
 		this.taskDate = taskDate;
 		this.taskInfo = taskInfo;
+		this.stId = stId;
 	}
 	public Task() {
 		super();
@@ -24,6 +26,13 @@ public class Task {
 		this.taskName = taskName;
 		this.taskDate = taskDate;
 		this.taskInfo = taskInfo;
+	}
+	public Task(int taskId2, String taskName2, LocalDate taskDate2, String taskInfo2) {
+		// TODO Auto-generated constructor stub
+		this.taskId = taskId2;
+		this.taskName = taskName2;
+		this.taskDate = taskDate2;
+		this.taskInfo = taskInfo2;
 	}
 	public int getTaskId() {
 		return taskId;
@@ -48,6 +57,12 @@ public class Task {
 	}
 	public void setTaskInfo(String taskInfo) {
 		this.taskInfo = taskInfo;
+	}
+	public int getstId() {
+		return stId;
+	}
+	public void setstId(int stId) {
+		this.stId = stId;
 	}
 	@Override
 	public String toString() {

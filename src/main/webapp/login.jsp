@@ -33,6 +33,15 @@ body {
 	padding-bottom: 20px;
 }
 
+.container2 .msgHeading{
+		color: red;
+		position: relative;
+		left: 100px;
+		font-size: 25px;
+		margin: 0;
+		padding: 0;
+	}
+
 .container2 .heading {
 	color: #282d3a;
 	display: flex;
@@ -81,10 +90,21 @@ body {
 </style>
 </head>
 <body>
+
+	<%
+	String str3 = (String)request.getAttribute("message3");
+	%>
+
 	<div class="container1">
 		<div class="container2">
 
-			<form action="loginStudent" method="get">
+			<form action="loginStudent" method="post">
+			
+				<%
+				if(str3 != null){%>
+				<h3 class="msgHeading"><%= str3%></h3><br>
+				<%}%>
+			
 				<h1 class="heading">Login</h1>
 				<br> <input class="inputs" type="text" autofocus="autofocus"
 					placeholder="Enter your email here" name="email"><br>
